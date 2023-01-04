@@ -1,4 +1,5 @@
 from django.db import models
+from common.models import CommonModel
 
 ## Review (댓글)
 ## - User
@@ -6,7 +7,7 @@ from django.db import models
 ## - like
 ## - reply
 
-class Review(models.Model):
+class Review(CommonModel):
     content = models.CharField(max_length=120)
     like = models.PositiveIntegerField()
     reply = models.BooleanField(default=False)

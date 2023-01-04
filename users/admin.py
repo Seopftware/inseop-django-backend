@@ -28,3 +28,4 @@ class UserAdmin(UserAdmin):
         # ),
     )
     # pass
+    list_display = ["email", "nickname", "phone"]
