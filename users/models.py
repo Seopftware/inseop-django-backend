@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 ## User (유저)
@@ -14,9 +15,12 @@ from django.db import models
 ## - profileIntroduce
 ## - is_business (Boolean)
 
-class User(models.Model):
-    nickname = models.CharField(max_length=30)
-    phone = models.PositiveIntegerField() # 01011111111 # 양의 정수형 숫자
+# class User(models.Model):
+class User(AbstractUser):
+    nickname = models.CharField(max_length=30, default="")
+    phone = models.PositiveIntegerField(default=0) # 01011111111 # 양의 정수형 숫자
     is_business = models.BooleanField(default=False)
-    gender = models.CharField(max_length=10)
-    profileIntroduce = models.TextField(max_length=200)
+    gender = models.CharField(max_length=10, default="")
+    profileIntroduce = models.TextField(max_length=200, default="")
+    sns = models.CharField(max_length=10, default="")
+    # pass

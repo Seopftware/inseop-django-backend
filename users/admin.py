@@ -1,9 +1,30 @@
 from django.contrib import admin
 from .models import User
+from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    list_display = ("nickname", "phone", "is_business", "gender", "profileIntroduce", )
-    list_filter = ("is_business", )
-    search_fields = ("nickname", "phone", )
+class UserAdmin(UserAdmin):
+    fieldsets = (
+        ("유저 정보", {
+                "fields": ("email", "password", "is_business"),
+                "classes": ("wide",),
+            },
+        ),
+        # ("Permissions",{
+        #         "fields": (
+        #             "is_active",
+        #             "is_staff",
+        #             "is_superuser",
+        #             "user_permissions",
+        #         ),
+        #         "classes": ("collapse",),
+        #     },
+        # ),
+        # ("Important Dates", {
+        #         "fields": ("last_login", "date_joined"),
+        #         "classes": ("collapse",),
+        #     },
+        # ),
+    )
+    # pass
