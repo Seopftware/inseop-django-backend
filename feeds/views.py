@@ -6,9 +6,11 @@ def show_feed(request):
     return HttpResponse("This is Feed Page")
 
 def one_feed(request, feed_id):
-    feed = Feed.objects.get(id=feed_id)
-    # return HttpResponse(f"Feed Id is {feed_id}")
-    return render(request, "feed.html", {"data":feed})
+    try:
+        feed = Feed.objects.get(id=feed_id)
+        return render(request, "feed.html", {"feed":feed})
+    except Feed.DoesNotExist:
+        return render(request, "feed.html", {"error":False})
 
 def all_feed(request):
     feeds = Feed.objects.all()
