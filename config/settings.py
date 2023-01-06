@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "feeds.apps.FeedsConfig",
     "reviews.apps.ReviewsConfig",
     "common.apps.CommonConfig", # common을 config-settings에 추가하지 않아도 되는 이유는?
+    "rest_framework"
 ]
 
 MIDDLEWARE = [
