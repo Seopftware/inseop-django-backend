@@ -1,17 +1,20 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.exceptions import NotFound
+
 from .models import Feed
+from .serializers import FeedsSerializer
 
-def show_feed(request):
-    return HttpResponse("This is Feed Page")
+# Objects => JSON
+class Feeds(APIView):
+    def get(self, request):
+        feeds = Feed.objects.all() # objects
+        print("feeds")
+        print(feeds)
 
-def one_feed(request, feed_id):
-    try:
-        feed = Feed.objects.get(id=feed_id)
-        return render(request, "feed.html", {"feed":feed})
-    except Feed.DoesNotExist:
-        return render(request, "feed.html", {"error":False})
+        # objects => JSON: Serializer가 해준다.
+        serializer = FeedsSerializer(feeds, many=True)
+        print("serializer")
+        print(serializer)
 
-def all_feed(request):
-    feeds = Feed.objects.all()
-    return render(request, "feeds.html", {"datas":feeds, "title":"전체 피드 데이터"})
+        return Response(serializer.data)
